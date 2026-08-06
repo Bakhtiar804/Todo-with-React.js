@@ -15,20 +15,26 @@ function App() {
       <div className='input-btn'>
         <InputComponent value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
         <div className='btnFlex'>
-          <ButtonComponent onClick={() => setTodos([...todos, inputValue])} btnName={'Add todo'} />
+          <ButtonComponent onClick={() => { 
+            setTodos([...todos, inputValue])
+            setInputValue('');
+
+          }}
+            btnName={'Add todo'} />
           <ButtonComponent onClick={() => setTodos([])} btnName={'Delete All'} />
         </div>
 
 
-        <div>
+        
+
+      </div>
+<div>
           <ul>
             {todos.map((todo, index) => (
               <li key={index}>{todo}</li>
+
             ))}</ul>
         </div>
-
-      </div>
-
     </div>
   );
 }
