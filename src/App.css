@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+  background-color: #1C2838;
+  width: 500px;
+}
+
+
+.input-btn{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+
+.btnFlex{
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 5px;
+  align-items: center;
+ 
+}
+
+li{
+  list-style-type: none;
+  color: white;
+  text-align: left;
+  margin-top: 10px;
+}
