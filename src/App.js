@@ -4,7 +4,7 @@ import Heading from './components/heading/Heading.jsx';
 import InputComponent from './components/input/Input.jsx';
 import ButtonComponent from './components/button/Button.jsx';
 import { useState } from 'react';
-import { addtodoFirebase } from './components/config/Config.js';
+import { saveTodo } from './components/config/Config.js';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -19,7 +19,7 @@ function App() {
           <ButtonComponent onClick={() => { 
             setTodos([...todos, inputValue])
             setInputValue('');
-            addtodoFirebase(inputValue)
+            saveTodo(inputValue);
 
           }}
             btnName={'Add todo'} />

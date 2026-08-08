@@ -1,7 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore , collection, addDoc } from "firebase/firestore";
+import { getFirestore  } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,20 +25,36 @@ const analytics = getAnalytics(app);
 
 const db = getFirestore(app);
 
-const addtodoFirebase = async (todo , onClick) => {
-  try {
-    const docRef = await addDoc(collection(db, "todos"), {
-      text: todo
-    });
-    console.log("Document written with ID: ", docRef.id);
-  } catch (error) {
-    console.error("Error adding document: ", error);
+
+const saveTodo = async (todo) => {
+  let docId = localStorage.getItem("todoDocId");
+
+  if (!docId) {
+    docId = crypto.randomUUID();
+    localStorage.setItem("todoDocId", docId);
   }
+
+  const docRef = doc(db, "todos", docId);
+
+  const snap = await getDoc(docRef);
+
+  let todos = [];
+
+  if (snap.exists()) {
+    todos = snap.data().todos;
+  }
+
+  todos.push(todo);
+
+  await setDoc(docRef, {
+    todos: todos
+  });
 };
 
 export{
     app,
     analytics,
-    addtodoFirebase
+    saveTodo
 }
+
 
